@@ -59,6 +59,7 @@
                     document.querySelector("#message").innerHTML = response.body;
                 })
                 .catch(function (error) {
+                    document.querySelector("#message").innerHTML = error.message;
                     console.log(error.message);
                 });
         }
