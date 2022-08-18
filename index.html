@@ -56,7 +56,7 @@
                 .then(function (response) {
 
                     console.log(response.data);
-                    document.querySelector("#message").innerHTML = response.body;
+                    document.querySelector("#message").innerHTML = response.data;
                 })
                 .catch(function (error) {
                     document.querySelector("#message").innerHTML = error.message;
