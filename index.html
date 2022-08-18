@@ -41,6 +41,9 @@
             let password = document.querySelector("#password").value;
             let c_password = document.querySelector("#c_password").value;
 
+            if (password !== c_password) {
+                document.querySelector("#message").innerHTML = "Your password and confirm pasword does not match.";
+            }
             // now we will send a post request to our server.
 
             axios.post('https://login-signup-without-database.herokuapp.com/signup', {
