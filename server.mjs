@@ -54,10 +54,12 @@ app.post('/signup', (req, res) => {
 })
 
 // login user
-app.post('/signin', () => {
+app.post('/signin', (req, res) => {
     let body=req.body;
     if(!body.email || !body.password){
-        res.status(400).send(`Email and password are required.`);
+        res.status(400).send(
+            {message: "Email and password are required."}
+        );
         return;
     }
 
@@ -90,7 +92,11 @@ app.post('/signin', () => {
     }
 
     if(!isFound){
-        res.status(404).send(`User not found`);
+        res.status(404).send(
+            {
+                message:"User not found"
+            }
+        );
         return;
     }
 })
