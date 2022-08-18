@@ -43,7 +43,7 @@
 
             // now we will send a post request to our server.
 
-            axios.post('https://social-media-server-testing.herokuapp.com/', {
+            axios.post('https://login-signup-without-database.herokuapp.com/signup', {
                 "name": name,
                 "email": email,
                 "city": city,
@@ -53,29 +53,10 @@
                 .then(function (response) {
 
                     console.log(response.data);
-                    document.querySelector("#message").innerHTML = response.message;
+                    document.querySelector("#message").innerHTML = response.body;
                 })
                 .catch(function (error) {
                     console.log(error.message);
-                });
-        }
-
-        function getAllUsers() {
-            axios.get('https://social-media-server-testing.herokuapp.com/user')
-                .then(function (response) {
-                    // handle success
-                    console.log(response.data);
-
-                    response.data.map(eachUser => {
-                        document.querySelector("#allUsersLists").innerHTML += `Name: ${eachUser.name} Email: ${eachUser.email} Password: ${eachUser.password} <br/>`;
-                    })
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                })
-                .then(function () {
-                    // always executed
                 });
         }
 
