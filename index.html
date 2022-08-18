@@ -59,7 +59,7 @@
                     document.querySelector("#message").innerHTML = response.data.message;
                 })
                 .catch(function (error) {
-                    document.querySelector("#message").innerHTML = error.message;
+                    document.querySelector("#message").innerHTML = error.response.data.message;
                     console.log(error.response.data.message);
                 });
         }
