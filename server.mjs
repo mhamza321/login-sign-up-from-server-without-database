@@ -22,16 +22,34 @@ app.post('/signup', (req, res) => {
         return;
     }
 
+    let isFound = false;
+
+    for(let i = 0; i < usersBase.length; i++){
+        if(usersBase[i].email === body.email.toLowerCase()){
+            isFound = true;
+            break;
+        }
+    }
+
+    if(isFound){ // this email already exists.
+        res.status(400).send(
+            {
+                message:`${body.email} already exists`
+            }
+            );
+            return;
+    }
+
     let newUser = {
         userId: nanoid(),
         name: body.name,
-        email: body.email,
+        email: body.email.toLowerCase(),
         password: body.password,
         city: body.city
     }
 
     usersBase.push(newUser);
-    res.status(200).send(`Your account has been created successfully.`);
+    res.status(200).send({message:"Your account has been created successfully."});
 
 })
 
