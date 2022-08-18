@@ -54,7 +54,7 @@ app.post('/signup', (req, res) => {
 })
 
 // login user
-app.post('/login', () => {
+app.post('/signin', () => {
     let body=req.body;
     if(!body.email || !body.password){
         res.status(400).send(`Email and password are required.`);
