@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front End for sending request to our server</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>Sign Up</h1>
+
+    <form action="" onsubmit="signUp(); return false;">
+        <label for="name">Name</label>
+        <input type="text" id="name"> <br>
+
+        <label for="email">Email</label>
+        <input type="email" id="email"> <br>
+
+        <label for="city">City</label>
+        <input type="text" id="city"> <br>
+
+        <label for="password">Password</label>
+        <input type="password" id="password"> <br>
+
+        <label for="c_password">Confirm Password</label>
+        <input type="password" id="c_password"> <br>
+
+        <input type="submit" value="Sign Up">
+    </form>
+    <br>
+    <p id="message"></p>
+
+    <script>
+        function signUp() {
+            let name = document.querySelector("#name").value;
+            let email = document.querySelector("#email").value;
+            let city = document.querySelector("#city").value;
+            let password = document.querySelector("#password").value;
+            let c_password = document.querySelector("#c_password").value;
+
+            // now we will send a post request to our server.
+
+            axios.post('https://social-media-server-testing.herokuapp.com/', {
+                "name": name,
+                "email": email,
+                "city": city,
+                "password": password,
+                "c_password": c_password
+            })
+                .then(function (response) {
+
+                    console.log(response.data);
+                    document.querySelector("#message").innerHTML = response.message;
+                })
+                .catch(function (error) {
+                    console.log(error.message);
+                });
+        }
+
+        function getAllUsers() {
+            axios.get('https://social-media-server-testing.herokuapp.com/user')
+                .then(function (response) {
+                    // handle success
+                    console.log(response.data);
+
+                    response.data.map(eachUser => {
+                        document.querySelector("#allUsersLists").innerHTML += `Name: ${eachUser.name} Email: ${eachUser.email} Password: ${eachUser.password} <br/>`;
+                    })
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(function () {
+                    // always executed
+                });
+        }
+
+    </script>
+</body>
+
+</html>
